@@ -137,7 +137,7 @@ const Home: React.FC = () => {
           We provide specialized and rigorous coaching to help our students excel in top-tier competitive examinations and secure admissions into prestigious institutions.
         </p>
         <div style={{ display: 'flex', justifyContent: 'center', flexWrap: 'wrap', gap: '1.5rem' }}>
-          {['Olympiad', 'Rukmapur Sainik School', 'Navodaya', 'Ekalavya Residential Model', 'Gurukula'].map((exam, i) => (
+          {['Olympiad', 'Rukmapur Sainik School', 'Navodaya', 'Ekalavya Residential Model', 'Gurukula','All india sainik school'].map((exam, i) => (
             <div key={i} className="exam-pill">
               {exam}
             </div>
