@@ -1,7 +1,11 @@
 import React from 'react';
 import { CONTACT_INFO, SCHOOL_INFO } from '../constants';
 
-const Footer: React.FC = () => {
+interface FooterProps {
+  setActiveTab: (tab: string) => void;
+}
+
+const Footer: React.FC<FooterProps> = ({ setActiveTab }) => {
   return (
     <footer>
       <div className="container footer-container">
@@ -17,7 +21,7 @@ const Footer: React.FC = () => {
           <p>Phone: {CONTACT_INFO.phone}</p>
         </div>
 
-        <div className="footer-col" style={{ flex: '2', minWidth: '300px' }}>
+        <div className="footer-col footer-col-wide">
           <h4 className="footer-heading">Our Campuses</h4>
           {SCHOOL_INFO.schools.map((school, index) => (
             <div key={index} style={{ marginBottom: '1rem' }}>
@@ -30,8 +34,8 @@ const Footer: React.FC = () => {
         <div className="footer-col">
           <h4 className="footer-heading">Legal</h4>
           <ul className="footer-list">
-            <li><a href="#" className="footer-link">Privacy Policy</a></li>
-            <li><a href="#" className="footer-link">Terms of Service</a></li>
+            <li><button onClick={() => setActiveTab('privacy')} className="footer-link">Privacy Policy</button></li>
+            <li><button onClick={() => setActiveTab('terms')} className="footer-link">Terms &amp; Conditions</button></li>
           </ul>
         </div>
 

@@ -1,16 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { SCHOOL_INFO } from '../constants';
+import carouselImages from 'virtual:carousel-images';
 
-const images = [
-  'https://images.unsplash.com/photo-1541339907198-e08756dedf3f?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
-  'https://images.unsplash.com/photo-1577896851231-70ef18881754?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80',
-  'https://images.unsplash.com/photo-1509062522246-3755977927d7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1200&q=80'
-];
+// Slides come from public/school_carousel — add or remove files there to change them.
+const images = carouselImages.map((file) => `${import.meta.env.BASE_URL}school_carousel/${encodeURIComponent(file)}`);
 
 const Home: React.FC = () => {
   const [currentSlide, setCurrentSlide] = useState(0);
 
   useEffect(() => {
+    if (images.length < 2) return;
     const timer = setInterval(() => {
       setCurrentSlide((prev) => (prev + 1) % images.length);
     }, 5000);
@@ -36,8 +35,9 @@ const Home: React.FC = () => {
           />
         ))}
         <div className="carousel-overlay">
+          <img src={`${import.meta.env.BASE_URL}assets/logo.png`} alt="G.N.R logo" className="carousel-logo" />
           <h2 className="carousel-title">{SCHOOL_INFO.name}</h2>
-          <p style={{ fontSize: '1.2rem', margin: 0 }}>{SCHOOL_INFO.welcomeText}</p>
+          <p style={{ fontSize: '1.2rem', margin: 0, fontWeight: 600 }}>{SCHOOL_INFO.welcomeText}</p>
         </div>
       </section>
 
