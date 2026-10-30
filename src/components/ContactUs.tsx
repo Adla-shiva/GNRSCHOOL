@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { CONTACT_INFO, GOOGLE_FORM, SCHOOL_INFO } from '../constants';
+import { ROUTES } from '../routes';
 
 type Status = 'idle' | 'sending' | 'sent' | 'error';
 
@@ -38,6 +39,13 @@ const ContactUs: React.FC = () => {
             <input type="text" name="name" placeholder="Your Name" className="form-input" required />
             <input type="email" name="email" placeholder="Your Email" className="form-input" required />
             <textarea name="message" placeholder="Your Message" rows={5} className="form-input" required></textarea>
+            <label className="consent-label">
+              <input type="checkbox" name="consent" required />
+              <span>
+                By submitting the above information you agree to our{' '}
+                <a href={ROUTES.privacy} target="_blank" rel="noopener noreferrer">Privacy Policy</a>
+              </span>
+            </label>
             <button type="submit" className="btn-primary" style={{ alignSelf: 'flex-start' }} disabled={status === 'sending'}>
               {status === 'sending' ? 'Sending...' : 'Send Message'}
             </button>

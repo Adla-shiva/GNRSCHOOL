@@ -9,9 +9,23 @@ import ContactUs from './components/ContactUs';
 import Gallery from './components/Gallery';
 import PrivacyPolicy from './components/PrivacyPolicy';
 import TermsConditions from './components/TermsConditions';
+import { ROUTES, tabFromPath } from './routes';
 
 function App() {
-  const [activeTab, setActiveTab] = useState('home');
+  const [activeTab, setCurrentTab] = useState(() => tabFromPath(window.location.pathname));
+
+  const setActiveTab = (tab: string) => {
+    const path = ROUTES[tab] ?? ROUTES.home;
+    if (window.location.pathname !== path) window.history.pushState(null, '', path);
+    setCurrentTab(tab);
+  };
+
+  // Keep the page in sync with the browser's back/forward buttons.
+  useEffect(() => {
+    const onPopState = () => setCurrentTab(tabFromPath(window.location.pathname));
+    window.addEventListener('popstate', onPopState);
+    return () => window.removeEventListener('popstate', onPopState);
+  }, []);
 
   useEffect(() => {
     window.scrollTo(0, 0);
